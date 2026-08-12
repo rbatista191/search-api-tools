@@ -279,6 +279,27 @@ Ideal for AI applications (chatbots, research assistants, content generation), S
 
 ---
 
+## **[cloro](https://cloro.dev)**
+
+The only API here that returns AI answer engines as structured data, alongside Google Search and News.
+
+![cloro Screenshot](image/cloro.webp)
+
+
+Every other tool on this list reads a search engine results page. cloro reads those too, and adds the surfaces that increasingly answer the query before a SERP is ever shown: ChatGPT, Perplexity, Gemini, Microsoft Copilot, Grok, Google AI Mode and Google AI Overview. Each is its own endpoint rather than a flag on a Google call.
+
+That matters because the payload is different. There is no ranking in an AI answer, so what you want back is the citation list, and cloro returns it parsed: every cited source with its position, label and URL, plus the query fan-out terms the engine searched internally before answering. On Google endpoints you get the familiar SERP envelope, with AI Overview text and its sources returned inline rather than behind a second request.
+
+Pricing is credit-based and the credits are consumed per surface, which is more honest than a flat per-search rate when a ChatGPT scrape and a Google query cost very different amounts to produce. A Google Search call is 3 credits (plus 2 per additional page), Perplexity 3, Google AI Mode 4, ChatGPT with web search 5. Plans run from a free tier at 500 credits a month, to Lite at $30/month for 37,500 credits ($0.80 per 1,000), Hobby at $100/month for 250,000 ($0.40 per 1,000), and down to $0.31 per 1,000 on the largest self-serve tier. Credits are deducted only on successful extraction.
+
+Geo-targeting works at country and US state level on the AI surfaces, and at city level on Google via canonical location names or a pre-encoded UULE string. Async and webhook delivery are available for batch workloads, which matters here more than on a standard SERP API because AI answers stream and a sync call can take several seconds longer than a page fetch.
+
+The integration surface is deliberately small: one REST API, official Python and Node clients, and a hosted [MCP server](https://github.com/cloro-dev/mcp-server) whose source is public if you want to read what runs before pointing an agent at it. Documentation is at [cloro.dev/docs](https://cloro.dev/docs).
+
+cloro fits teams tracking brand visibility in AI answers, building GEO or AEO products, or feeding citation data into their own dashboards and warehouses. It is API-first with no bundled UI, so if what you need is a dashboard a marketing team logs into rather than a data layer you build on, one of the AI-visibility platforms will suit you better.
+
+---
+
 ## FAQ
 
 **Which search API offers the fastest response times?**
